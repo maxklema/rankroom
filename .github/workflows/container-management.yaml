@@ -25,11 +25,11 @@ jobs:
           deploy_on_start: y
           project_repository: https://github.com/maxklema/rankroom
           require_env_vars: y
-          container_env_vars: "{'api_key': 1234}"
+          container_env_vars: '{"API_KEY": "1234"}'
           install_command: npm i
           build_command:
           start_command: npm start
           runtime_language: nodejs
           require_services: y
-          services: "['mongodb']"
+          services: '["mongodb"]'
           custom_services:
