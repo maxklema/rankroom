@@ -15,7 +15,7 @@ jobs:
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
-          github_repository_owner: ${{ github.repository_owner }}
+          github_repository_owner: maxklema
           github_ref_name: ${{ github.ref_name }}
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: mklema
