@@ -10,6 +10,7 @@ on:
 jobs:
   manage-container:
     runs-on: self-hosted
+    if: github.event_name != 'push' || github.event.created == false
     steps:
       - uses: maxklema/mie-opensource-action@main
         with:
