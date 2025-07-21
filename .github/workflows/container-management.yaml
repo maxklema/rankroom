@@ -28,7 +28,7 @@ jobs:
           http_port: 32000
           linux_distribution: debian
           github_pat: ${{ secrets.GH_PAT }}
-          is_self_hosted: ${{ contains(runner.labels, 'self-hosted') }}
+          create_runner_job: y
   manage-container:
     runs-on: self-hosted
     if: github.event_name != 'push' || github.event.created == false
@@ -56,4 +56,4 @@ jobs:
           services: '["mongodb"]'
           custom_services:
           github_pat: ${{ secrets.GH_PAT }}
-          is_self_hosted: ${{ contains(runner.labels, 'self-hosted') }}
+          create_runner_job: n
