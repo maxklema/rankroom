@@ -11,6 +11,11 @@ jobs:
   setup-runner:
     runs-on: ubuntu-latest
     steps:
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
       - uses: maxklema/mie-opensource-action@main
         with:
           github_event_name: ${{ github.event_name }}
