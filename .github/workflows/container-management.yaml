@@ -28,21 +28,11 @@ jobs:
           http_port: 32000
           linux_distribution: debian
           github_pat: ${{ secrets.GH_PAT }}
+          is_self_hosted: ${{ contains(runner.labels, 'self-hosted') }}
   manage-container:
     runs-on: self-hosted
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - name: Install dependencies
-        run: |
-          OS=$(cat /etc/os-release | grep debian)
-          if [ ! -z "$OS" ]; then
-            sudo apt-get update
-            sudo apt-get install -y sshpass jq
-          else
-            sudo dnf update
-            sudo dnf install -y sshpass jq
-          fi
-
       - uses: maxklema/mie-opensource-action@main
         with:
           github_event_name: ${{ github.event_name }}
@@ -66,3 +56,4 @@ jobs:
           services: '["mongodb"]'
           custom_services:
           github_pat: ${{ secrets.GH_PAT }}
+          is_self_hosted: ${{ contains(runner.labels, 'self-hosted') }}
