@@ -28,6 +28,7 @@ jobs:
           http_port: 32000
           linux_distribution: debian
           github_pat: ${{ secrets.GH_PAT }}
+          deploy_on_start: y
   manage-container:
     runs-on: self-hosted
     if: github.event_name != 'push' || github.event.created == false
