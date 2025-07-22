@@ -10,6 +10,7 @@ on:
 jobs:
   setup-runner:
     runs-on: ubuntu-latest
+    if: github.event_name != 'push' || github.event.created == false
     steps:
       - name: Install dependencies
         run: |
