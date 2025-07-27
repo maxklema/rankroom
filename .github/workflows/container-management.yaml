@@ -49,7 +49,7 @@ jobs:
           deploy_on_start: y
           require_env_vars: y
           container_env_vars: '{"API_KEY": "1234"}'
-          project_root: .
+          project_root: /
           install_command: npm i
           build_command: npm build
           start_command: npm start
