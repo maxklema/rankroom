@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt-get install -y sshpass jq
 
-      - uses: maxklema/mie-opensource-action@main
+      - uses: maxklema/proxmox-launchpad@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
@@ -33,7 +33,7 @@ jobs:
     needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - uses: maxklema/mie-opensource-action@main
+      - uses: maxklema/proxmox-launchpadn@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
