@@ -25,6 +25,7 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
+          http_port: 32000
           linux_distribution: debian
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: y
@@ -45,5 +46,15 @@ jobs:
           http_port: 32000
           linux_distribution: debian
           public_key: ${{ secrets.PUBLIC_KEY }}
+          deploy_on_start: y
+          require_env_vars: y
+          container_env_vars: '{"API_KEY": "1234"}'
+          install_command: npm i
+          build_command:
+          start_command: npm start
+          runtime_language: nodejs
+          require_services: y
+          services: '["mongodb"]'
+          custom_services:
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: n
