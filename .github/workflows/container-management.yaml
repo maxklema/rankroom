@@ -1,3 +1,4 @@
+# .github/workflows/proxmox.yml
 name: Proxmox Container Management
 
 on:
@@ -8,14 +9,14 @@ on:
 
 jobs:
   setup-runner:
-    runs-on: ubtunu-latest
+    runs-on: ubuntu-latest
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
-          sudo apt install sshpass jq
+          sudo apt-get install -y sshpass jq
 
-      - uses: maxklema/proxmox-launchpad@main
+      - uses: maxklema/mie-opensource-action@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
@@ -32,7 +33,7 @@ jobs:
     needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - uses: maxklema/proxmox-launchpad@main
+      - uses: maxklema/mie-opensource-action@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
@@ -41,8 +42,8 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
-          linux_distribution: debian
-          github_pat: ${{ secrets.GH_PAT }}
-          public_key: ${{ secrets.PUBLIC_KEY }}
           http_port: 32000
+          linux_distribution: debian
+          public_key: ${{ secrets.PUBLIC_KEY }}
+          github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: n
