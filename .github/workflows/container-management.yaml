@@ -8,12 +8,12 @@ on:
 
 jobs:
   setup-runner:
-    runs-on: ubtunu-latest
+    runs-on: ubtuntu-latest
     if: github.event_name != 'push' || github.event.created == false
     steps:
       - name: Install Dependencies
         run: |
-          sudo apt install sshpass jq
+          sudo apt install -y sshpass jq
 
       - uses: maxklema/proxmox-launchpad@main
         with:
