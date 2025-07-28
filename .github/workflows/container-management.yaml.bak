@@ -1,4 +1,3 @@
-# .github/workflows/proxmox.yml
 name: Proxmox Container Management
 
 on:
@@ -12,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          sudo apt-get install -y sshpass jq
+          sudo apt install -y sshpass jq
 
-      - uses: maxklema/mie-opensource-action@main
+      - uses: maxklema/proxmox-launchpad@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
@@ -25,7 +24,6 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
-          http_port: 32000
           linux_distribution: debian
           github_pat: ${{ secrets.GH_PAT }}
           create_runner_job: y
@@ -34,7 +32,7 @@ jobs:
     needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - uses: maxklema/mie-opensource-action@main
+      - uses: maxklema/proxmox-launchpad@main
         with:
           github_event_name: ${{ github.event_name }}
           github_repository: ${{ github.event.repository.name }}
@@ -43,18 +41,19 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
-          http_port: 32000
           linux_distribution: debian
+          github_pat: ${{ secrets.GH_PAT }}
           public_key: ${{ secrets.PUBLIC_KEY }}
+          http_port: 32000
+          create_runner_job: n
           deploy_on_start: y
           require_env_vars: y
           container_env_vars: '{"API_KEY": "1234"}'
+          project_root: /
           install_command: npm i
-          build_command:
+          build_command: npm build
           start_command: npm start
           runtime_language: nodejs
           require_services: y
           services: '["mongodb"]'
-          custom_services:
-          github_pat: ${{ secrets.GH_PAT }}
-          create_runner_job: n
+          custom_services: '[["sudo apt-get update", "sudo apt install nginx", "sudo systemctl enable nginx", "sudo systemctl start nginx"]]'
