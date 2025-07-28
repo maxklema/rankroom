@@ -46,3 +46,14 @@ jobs:
           public_key: ${{ secrets.PUBLIC_KEY }}
           http_port: 32000
           create_runner_job: n
+          deploy_on_start: y
+          require_env_vars: y
+          container_env_vars: '{"API_KEY": "1234"}'
+          project_root: /
+          install_command: npm i
+          build_command: npm build
+          start_command: npm start
+          runtime_language: nodejs
+          require_services: y
+          services: '["mongodb"]'
+          custom_services: '[["sudo apt-get update", "sudo apt install nginx", "sudo systemctl enable nginx", "sudo systemctl start nginx"]]'
