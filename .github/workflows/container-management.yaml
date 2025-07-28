@@ -51,7 +51,7 @@ jobs:
           container_env_vars: '{"API_KEY": "1234"}'
           project_root: /
           install_command: npm i
-          build_command: npm build
+          build_command:
           start_command: npm start
           runtime_language: nodejs
           require_services: y
