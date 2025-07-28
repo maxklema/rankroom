@@ -46,4 +46,3 @@ jobs:
           public_key: ${{ secrets.PUBLIC_KEY }}
           http_port: 32000
           create_runner_job: n
-          deploy_on_start: y
