@@ -11,15 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Install Dependencies
         run: |
           sudo apt update
           sudo apt install -y sshpass jq
 
-      - uses: ./
+      - uses: maxklema/proxmox-launchpad@main
         with:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
@@ -32,7 +29,7 @@ jobs:
     needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - uses: ./
+      - uses: maxklema/proxmox-launchpad@main
         with:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
