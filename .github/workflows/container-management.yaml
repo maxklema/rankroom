@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'push' || github.event.created == false
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Install Dependencies
         run: |
+          sudo apt update
           sudo apt install -y sshpass jq
 
-      - uses: maxklema/proxmox-launchpad@main
+      - uses: ./
         with:
-          github_event_name: ${{ github.event_name }}
-          github_repository: ${{ github.event.repository.name }}
-          github_repository_owner: ${{ github.repository_owner }}
-          github_ref_name: ${{ github.event.ref }}
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
@@ -32,12 +32,8 @@ jobs:
     needs: setup-runner
     if: github.event_name != 'push' || github.event.created == false
     steps:
-      - uses: maxklema/proxmox-launchpad@main
+      - uses: ./
         with:
-          github_event_name: ${{ github.event_name }}
-          github_repository: ${{ github.event.repository.name }}
-          github_repository_owner: ${{ github.repository_owner }}
-          github_ref_name: ${{ github.event.ref }}
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           container_password: ${{ secrets.CONTAINER_PASSWORD }}
@@ -51,7 +47,6 @@ jobs:
           container_env_vars: '{"API_KEY": "1234"}'
           project_root: /
           install_command: npm i
-          build_command:
           start_command: npm start
           runtime_language: nodejs
           require_services: y
