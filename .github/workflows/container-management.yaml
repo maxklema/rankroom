@@ -28,6 +28,7 @@ jobs:
           public_key: ${{ secrets.PUBLIC_KEY }}
           container_env_vars: '{"API_KEY": "1234"}'
           install_command: npm i
+          http_port: 3000
           start_command: npm start
           runtime_language: nodejs
           services: '["mongodb"]'
