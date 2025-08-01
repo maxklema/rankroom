@@ -26,9 +26,10 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           public_key: ${{ secrets.PUBLIC_KEY }}
+          github_pat: ${{ secrets.GH_PAT }}
           container_env_vars: '{"API_KEY": "1234"}'
           install_command: npm i
-          http_port: 3000
+          http_port: 100000
           start_command: npm start
           runtime_language: nodejs
           services: '["mongodb"]'
