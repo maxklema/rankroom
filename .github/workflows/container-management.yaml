@@ -12,7 +12,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt install -y sshpass jq
-      - uses: maxklema/proxmox-launchpad@test
+      - uses: maxklema/proxmox-launchpad@test-2
         with:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
@@ -21,7 +21,7 @@ jobs:
     runs-on: self-hosted
     needs: setup-runner
     steps:
-      - uses: maxklema/proxmox-launchpad@test
+      - uses: maxklema/proxmox-launchpad@test-2
         with:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
