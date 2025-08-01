@@ -2,14 +2,12 @@ name: Proxmox Container Management
 
 on:
   push:
-    branches: ["**"]
   create:
   delete:
 
 jobs:
   setup-runner:
     runs-on: ubuntu-latest
-    if: github.event_name != 'push' || github.event.created == false
     steps:
       - name: Install Dependencies
         run: |
@@ -22,7 +20,6 @@ jobs:
   manage-container:
     runs-on: self-hosted
     needs: setup-runner
-    if: github.event_name != 'push' || github.event.created == false
     steps:
       - uses: maxklema/proxmox-launchpad@test
         with:
@@ -34,4 +31,3 @@ jobs:
           start_command: npm start
           runtime_language: nodejs
           services: '["mongodb"]'
-          custom_services: '[["sudo apt-get update", "sudo apt install nginx", "sudo systemctl enable nginx", "sudo systemctl start nginx"]]'
