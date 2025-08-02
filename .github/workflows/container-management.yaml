@@ -27,7 +27,7 @@ jobs:
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           github_pat: ${{ secrets.GH_PAT }}
           install_command: npm i
-          http_port: 10000000
+          http_port: 32000
           start_command: npm start
           runtime_language: nodejs
           services: '["mongodb"]'
