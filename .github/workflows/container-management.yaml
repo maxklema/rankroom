@@ -25,7 +25,7 @@ jobs:
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
           github_pat: ${{ secrets.GH_PAT }}
-          http_port: 32000
+          http_port: 10000000
           install_command: npm i
           start_command: npm start
           runtime_language: nodejs
