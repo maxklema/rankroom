@@ -26,7 +26,7 @@ jobs:
           - name: Deploy to Proxmox
             uses: maxklema/proxmox-launchpad@main
             with: 
-                proxmox_username: mklema
+                proxmox_username: mklem
                 proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
                 github_pat: ${{ secrets.RUNNER_PAT }}
                 linux_distribution: rocky
