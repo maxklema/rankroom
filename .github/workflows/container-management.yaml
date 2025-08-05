@@ -33,6 +33,6 @@ jobs:
                 install_command: npm install
                 start_command: npm run start
                 runtime_language: nodejs
-                services: '["mongod"]'
+                services: '["mongodb"]'
 
                 
