@@ -16,7 +16,7 @@ jobs:
             - name: Setting up runner
               uses: maxklema/proxmox-launchpad@main
               with:
-                proxmox_username: mklema
+                proxmox_username: mklem
                 proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
                 github_pat: ${{ secrets.RUNNER_PAT }}
     deploy:
