@@ -1,32 +1,38 @@
-name: Proxmox Container Management
+name: Proxmox Deployment
 
-on:
-  push:
-  create:
-  delete:
-
+on: 
+    push:
+    create:
+    delete:
+  
 jobs:
-  setup-runner:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Dependencies
-        run: sudo apt install -y sshpass jq
-      - uses: maxklema/proxmox-launchpad@test-2
-        with:
-          proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
-          github_pat: ${{ secrets.GH_PAT }}
-  manage-container:
-    runs-on: self-hosted
-    needs: setup-runner
-    steps:
-      - uses: maxklema/proxmox-launchpad@test-2
-        with:
-          proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
-          github_pat: ${{ secrets.GH_PAT }}
-          http_port: 10000000
-          install_command: npm i
-          start_command: npm start
-          runtime_language: nodejs
-          services: '["mongodb"]'
+    setup-runner:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install Dependencies
+              run: |
+                sudo apt-get update
+                sudo apt install -y sshpass jq
+            - name: Setting up runner
+              uses: maxklema/proxmox-launchpad@main
+              with:
+                proxmox_username: mklema
+                proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
+                github_pat: ${{ secrets.RUNNER_PAT }}
+    deploy:
+        runs-on: self-hosted
+        needs: setup-runner
+        steps:
+          - name: Deploy to Proxmox
+            uses: maxklema/proxmox-launchpad@main
+            with: 
+                proxmox_username: mklema
+                proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
+                github_pat: ${{ secrets.RUNNER_PAT }}
+                http_port: 32000
+                install_command: npm install
+                start_command: npm run start
+                runtime_language: nodejs
+                services: '["mongod"]'
+
+                
