@@ -1,4 +1,4 @@
-# Collaborative Decision Maker
+# Collaborative Decision Maker Fork
 
 A Node.js application for facilitating collaborative decision-making through a structured three-phase workflow.
 
