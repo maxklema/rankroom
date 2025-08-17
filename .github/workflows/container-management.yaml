@@ -18,7 +18,7 @@ jobs:
             with: 
                 proxmox_username: mklema
                 proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-                container_env_vars: '{"API_KEY": "your-api-key", "NODE_ENV": "production"}'
+                container_env_vars: '{"API_KEY": "your-api-key-2", "NODE_ENV": "production-2"}'
                 http_port: 32000
                 install_command: npm install
                 start_command: npm run start
